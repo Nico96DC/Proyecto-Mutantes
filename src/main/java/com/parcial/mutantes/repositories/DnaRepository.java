@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface DnaRepository extends JpaRepository<Dna, Long> {
     Optional<Dna> findByDna(String[] dna);
-    Long countByIsMutant(boolean isMutant);
+    long countByIsMutant(boolean isMutant);
 }

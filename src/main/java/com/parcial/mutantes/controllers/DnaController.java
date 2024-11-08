@@ -1,5 +1,6 @@
 package com.parcial.mutantes.controllers;
 
+import com.parcial.mutantes.dtos.DnaRequest;
 import com.parcial.mutantes.services.DnaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,11 +15,8 @@ public class DnaController {
     private DnaService dnaService;
 
     @PostMapping("/")
-    public ResponseEntity<String> isMutant(@RequestBody String[] dna) {
-        try {
-            return ResponseEntity.ok("Mutante detectado");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No es mutante");
-        }
+    public ResponseEntity<String> isMutant(@RequestBody DnaRequest dnaRequest) {
+        boolean isMutant = dnaService.isMutant(dnaRequest.getDna());
+        return isMutant ? ResponseEntity.ok("Mutante detectado.") : ResponseEntity.status(HttpStatus.FORBIDDEN).body("No es mutante.");
     }
 }
